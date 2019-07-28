@@ -20,6 +20,8 @@ command name   |description
 /near          |Displays players that are neaeby
 /warps         |Lists all warps on a server
 /warp [name]   |Teleports to a warp
+/addwarp [name]|Adds a warp (requires warp.add permission)
+/delwarp [name]|Deletes a warp (requires warp.delete permission)
 /tpa [name]    |Requests a teleport to a user
 /tpahere [name]|Requests for a user to teleport to you
 /tpaccept      |Accepts a teleport request
