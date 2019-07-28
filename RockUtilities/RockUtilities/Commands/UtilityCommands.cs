@@ -115,11 +115,11 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    /*if (subject.Equals(player))
+                    if (subject.Equals(player))
                     {
                         Chat.Send(player, "You cannot teleport to yourself");
                         return true;
-                    }*/
+                    }
 
                     if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID && !MiscManager.activeteleports[subject.ID].completed)
                     {
