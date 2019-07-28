@@ -134,16 +134,11 @@ namespace RockUtils.Commands
 
                     Task.Run(async delegate
                     {
-                        while (!(currentTeleport.expired || currentTeleport.completed))
-                        {
-                            await Task.Delay(1000);
-                        }
-
+                        await Task.Delay(currentTeleport.expirationInSeconds * 1000);
                         if (!currentTeleport.completed)
                         {
-                            Chat.Send(player, $"<color=#f5350f>Teleport to <color=cyan>{subject.Name}</color> timed out</color>");
+                            Chat.Send(player, $"<color=#f5350f>Teleport request to <color=cyan>{subject.Name}</color> timed out</color>");
                         }
-
                         MiscManager.activeteleports.Remove(subject.ID);
                     });
 
@@ -180,16 +175,11 @@ namespace RockUtils.Commands
 
                     Task.Run(async delegate
                     {
-                        while (!(currentTeleport.expired || currentTeleport.completed))
-                        {
-                            await Task.Delay(1000);
-                        }
-
+                        await Task.Delay(currentTeleport.expirationInSeconds * 1000);
                         if (!currentTeleport.completed)
                         {
-                            Chat.Send(player, $"<color=#f5350f>Teleport to <color=cyan>{subject.Name}</color> timed out</color>");
+                            Chat.Send(player, $"<color=#f5350f>Teleport request for <color=cyan>{subject.Name}</color> timed out</color>");
                         }
-
                         MiscManager.activeteleports.Remove(subject.ID);
                     });
 
