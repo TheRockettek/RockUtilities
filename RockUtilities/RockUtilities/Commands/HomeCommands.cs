@@ -101,7 +101,7 @@ namespace RockUtils.Commands
             {
                 case "/home":
                     {
-                        playerHomes = RockUtils.Commands.HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
+                        playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
 
                         if (args.Count > 1)
                         {
@@ -118,7 +118,7 @@ namespace RockUtils.Commands
                                     Chat.Send(player, "You do not have any homes you can teleport to");
                                     return true;
                                 default:
-                                    Chat.Send(player, "Usage: /home {home}");
+                                    Chat.Send(player, "Usage: /home {name}");
                                     return true;
                             }
                         }
@@ -136,14 +136,44 @@ namespace RockUtils.Commands
                         return true;
                     }
                 case "/homes":
-                    playerHomes = RockUtils.Commands.HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
+                    playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
 
                     Chat.Send(player, $"Homes ({playerHomes.Keys.Count}): {string.Join(", ", playerHomes.Keys)}");
                     return true;
-                case "/removehome":
-                case "/rmhome":
+                case "/sethome":
+                case "/addhome":
+                    playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
+                    homeName = "home";
+
+                    if (args.Count > 1)
+                    {
+                        homeName = string.Join(" ", args.Skip(1));
+                    }
+
+                    if (playerHomes.ContainsKey(homeName))
+                    {
+                        if (args[0].ToLower().Equals("/sethome"))
+                        {
+                            playerHomes.Remove(homeName);
+                        }
+                        else
+                        {
+                            Chat.Send(player, "A home with this name already exists");
+                            return true;
+                        }
+                    }
+
+                    playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
+                    UnityEngine.Vector3Int intplayerPosition = new UnityEngine.Vector3Int(player.Position.x.ChangeType<int>(), player.Position.y.ChangeType<int>(), player.Position.z.ChangeType<int>());
+
+                    playerHomes.Add(homeName, intplayerPosition);
+                    HomeManager.homes[player.ID] = playerHomes;
+
+                    Chat.Send(player, $"Added home <color=cyan>{homeName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
+
+                    return true;
                 case "/delhome":
-                    playerHomes = RockUtils.Commands.HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
+                    playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
 
                     if (args.Count > 1)
                     {
@@ -160,7 +190,7 @@ namespace RockUtils.Commands
                                 Chat.Send(player, "You do not have any homes you can delete");
                                 return true;
                             default:
-                                Chat.Send(player, "Usage: /delhome {home}");
+                                Chat.Send(player, "Usage: /delhome {name}");
                                 return true;
                         }
                     }
@@ -172,33 +202,9 @@ namespace RockUtils.Commands
                     }
 
                     playerHomes.Remove(homeName);
-                    RockUtils.Commands.HomeManager.homes[player.ID] = playerHomes;
+                    HomeManager.homes[player.ID] = playerHomes;
 
                     Chat.Send(player, $"Removed home <color=cyan>{homeName}</color>");
-
-                    return true;
-                case "/sethome":
-                    playerHomes = RockUtils.Commands.HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
-                    homeName = "home";
-
-                    if (args.Count > 1)
-                    {
-                        homeName = string.Join(" ", args.Skip(1));
-                    }
-
-                    if (playerHomes.ContainsKey(homeName))
-                    {
-                        Chat.Send(player, "A home with this name already exists");
-                        return true;
-                    }
-
-                    playerHomes = RockUtils.Commands.HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
-                    UnityEngine.Vector3Int intplayerPosition = new UnityEngine.Vector3Int(player.Position.x.ChangeType<int>(), player.Position.y.ChangeType<int>(), player.Position.z.ChangeType<int>());
-
-                    playerHomes.Add(homeName, intplayerPosition);
-                    RockUtils.Commands.HomeManager.homes[player.ID] = playerHomes;
-
-                    Chat.Send(player, $"Added home <color=cyan>{homeName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
 
                     return true;
             }
