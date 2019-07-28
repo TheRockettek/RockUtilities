@@ -30,7 +30,7 @@ command name   |description
 ## Planned features
 
 - [ ] Teleport to colony and home UI
-- [ ] Global warp functionality
+- [x] Global warp functionality
 - [ ] Display a list of colonies
 - [ ] Display more colony stats for owners
 - [ ] WorldEdit
