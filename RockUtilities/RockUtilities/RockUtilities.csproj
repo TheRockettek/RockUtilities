@@ -53,8 +53,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\WEditCommands.cs" />
     <Compile Include="handler.cs" />
+    <Compile Include="Commands\UtilityCommands.cs" />
+    <Compile Include="Commands\HomeCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cp "$(TargetDir)$(TargetName).dll" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\Debug\Debug\$(TargetName).dll"
+cp "$(TargetDir)$(TargetName).pdb" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\Debug\Debug\$(TargetName).pdb"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
