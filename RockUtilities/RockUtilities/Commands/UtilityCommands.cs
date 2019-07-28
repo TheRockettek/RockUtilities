@@ -171,7 +171,7 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    Chat.Send(subject, $"Sending a teleport request to <color=cyan>{subject.Name}</color>");
+                    Chat.Send(player, $"Sending a teleport request to <color=cyan>{subject.Name}</color>");
                     Chat.Send(subject, $"<color=cyan>{player.Name}</color> would you to teleport to them. Do <color=cyan>/tpaccept</color> to accept");
                     currentTeleport = new ActiveTeleport(player.ID, subject.ID, true);
                     MiscManager.activeteleports[subject.ID] = currentTeleport;

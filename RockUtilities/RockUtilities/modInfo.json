@@ -1,0 +1,14 @@
+[
+  {
+    "dllpath": "RockUtilities.dll",
+    "name": "rockutils",
+    "namepretty": "Rock Utilities",
+    "version": "0.3",
+    "enabled": true,
+    "marksgamemodded": true,
+    "compatibleversions": [
+      "0.7.0"
+    ],
+    "about": "Utilities mod for handling your server"
+  }
+]
