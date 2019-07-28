@@ -115,13 +115,13 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    if (subject.Equals(player))
+                    /*if (subject.Equals(player))
                     {
                         Chat.Send(player, "You cannot teleport to yourself");
                         return true;
-                    }
+                    }*/
 
-                    if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID)
+                    if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID && !MiscManager.activeteleports[subject.ID].completed)
                     {
                         Chat.Send(player, "You already have a pending teleport to this person");
                         return true;
@@ -135,11 +135,14 @@ namespace RockUtils.Commands
                     Task.Run(async delegate
                     {
                         await Task.Delay(currentTeleport.expirationInSeconds * 1000);
-                        if (!currentTeleport.completed)
+                        if (currentTeleport.ChangeType<bool>() && !currentTeleport.completed)
                         {
                             Chat.Send(player, $"<color=#f5350f>Teleport request to <color=cyan>{subject.Name}</color> timed out</color>");
                         }
-                        MiscManager.activeteleports.Remove(subject.ID);
+                        if (MiscManager.activeteleports.ContainsKey(subject.ID))
+                        {
+                            MiscManager.activeteleports.Remove(subject.ID);
+                        }
                     });
 
                     return true;
@@ -162,7 +165,7 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID)
+                    if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID && !MiscManager.activeteleports[subject.ID].completed)
                     {
                         Chat.Send(player, "You already have a pending teleport to this person");
                         return true;
