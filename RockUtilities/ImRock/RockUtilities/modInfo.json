@@ -3,7 +3,7 @@
     "dllpath": "RockUtilities.dll",
     "name": "rockutils",
     "namepretty": "Rock Utilities",
-    "version": "0.3.5",
+    "version": "0.4",
     "enabled": true,
     "marksgamemodded": true,
     "compatibleversions": [
