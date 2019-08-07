@@ -224,7 +224,7 @@ namespace RockUtils.Commands
                     Chat.Send(subject, $"<color=cyan>{player.Name}</color> accepted the teleport request");
                     if (currentTeleport.ishere)
                     {
-                        Chatting.Commands.Teleport.TWeleportTo(player, subject.Position);
+                        Chatting.Commands.Teleport.TeleportTo(player, subject.Position);
                     }
                     else
                     {
