@@ -1745,7 +1745,7 @@ namespace RockUtils.WorldEdit
 
                     distinctItems = setBlockSelection.patternBlocks.Distinct().Count();
 
-                    blockChanges = Shapes.Shapes.MakeOutline(worldEditInteraction.area, 1);
+                    blockChanges = Shapes.Shapes.MakeOutline(worldEditInteraction.area, 0);
                     worldEditInteraction.ConvertPosToJobs(blockChanges, setBlockSelection, player, worldEditInteraction.blocksMaxPerUpdate());
                     Chat.Send(player, $"<color=#3490fa>{blockChanges.Count} blocks have been changed</color>");
 
