@@ -791,7 +791,7 @@ namespace RockUtils.WorldEdit
                 case "//hcyl":
                 case "//sphere":
                 case "//hsphere":
-                    if (!PermissionsManager.CheckAndWarnPermission(player, "worldedit"))
+                if (!PermissionsManager.CheckAndWarnPermission(player, "worldedit"))
                     {
                         return true;
                     }
