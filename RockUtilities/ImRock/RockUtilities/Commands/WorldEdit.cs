@@ -761,6 +761,7 @@ namespace RockUtils.WorldEdit
             switch (args[0])
             {
                 case "/toggleeditwand":
+                case "//version":
                 case "//pos1":
                 case "//pos2":
                 case "//stack":
@@ -845,10 +846,8 @@ namespace RockUtils.WorldEdit
 
             switch (args[0].ToLower())
             {
-                case "//debug":
-                    BasePattern selection = new RandomPattern(args[1]);
-                    blockChanges = Shapes.Shapes.MakePropSphere(new Vector3Int(player.Position), double.Parse(args[2]), bool.Parse(args[3]));
-                    worldEditInteraction.ConvertPosToJobs(blockChanges, selection, player, worldEditInteraction.blocksMaxPerUpdate());
+                case "//version":
+                    Chat.Send(player, "<color=#3490fa>You are using RockUtilities Worldedit v0.4</color>");
 
                     return true;
                 case "//copy":
@@ -1142,7 +1141,7 @@ namespace RockUtils.WorldEdit
                     worldEditInteraction.active = true;
                     if (player.Inventory.TryAdd(BlockTypes.BuiltinBlocks.Indices.bronzeaxe))
                     {
-                        Chat.Send(player, "<color=#3490fa>Left click: select position 1; Right click:: select position 2</color>");
+                        Chat.Send(player, "<color=#3490fa>Left click: select position 1; Right click: select position 2</color>");
                     }
                     else
                     {
