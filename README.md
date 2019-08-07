@@ -27,6 +27,8 @@ command name   |description
 /tpaccept      |Accepts a teleport request
 /tpdeny        |Denies a teleport request
 
+commmand                                                     |description
+-------------------------------------------------------------|-----------
 /toggleeditwand | Toggles if your edit wand should work//pos1|Sets position 1 to your location
 //pos2                                                       |Sets position 2 to your location
 //hpos1                                                      |Sets position 1 to the block you're looking at
