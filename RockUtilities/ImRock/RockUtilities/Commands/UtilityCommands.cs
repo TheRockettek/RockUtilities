@@ -1,12 +1,10 @@
 using Chatting;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using System.IO;
-using System;
-using UnityEngine;
 using Pipliz;
-using Pipliz.JSON;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace RockUtils.Commands
 {
@@ -58,12 +56,27 @@ namespace RockUtils.Commands
                         UnityEngine.Vector3Int spawn = ServerManager.TerrainGenerator.GetDefaultSpawnLocation();
                         Chatting.Commands.Teleport.TeleportTo(player, spawn);
                         Chat.Send(player, "You have been sent to spawn");
+
+                        return true;
+                    }
+                case "/colonyspawn":
+                    {
+                        if (player.ActiveColony == null)
+                        {
+                            Chat.Send(player, "You are not in an active colony");
+                            return true;
+                        }
+                        UnityEngine.Vector3Int spawn = player.ActiveColony.GetClosestBanner(player.VoxelPosition).Position;
+                        Chatting.Commands.Teleport.TeleportTo(player, spawn);
+                        Chat.Send(player, "You have been sent to the nearest colony spawn");
+
                         return true;
                     }
                 case "/players":
                     {
                         List<string> playerNames = Players.PlayerDatabase.Where(i => i.Value.ConnectionState == Players.EConnectionState.Connected).Select(i => i.Value.Name).ToList();
                         Chat.Send(player, $"Players ({playerNames.Count}): {string.Join(", ", playerNames)}");
+
                         return true;
                     }
                 case "/nearcolonies":
@@ -83,6 +96,7 @@ namespace RockUtils.Commands
                         {
                             Chat.Send(player, $"Nearby Colonies ({nearbyColonies.Count}): {string.Join(", ", nearbyColonies)}");
                         }
+
                         return true;
                     }
                 case "/near":
@@ -100,6 +114,7 @@ namespace RockUtils.Commands
                         {
                             Chat.Send(player, $"Nearby Players ({nearbyPlayers.Count}): {string.Join(", ", nearbyPlayers)}");
                         }
+
                         return true;
                     }
                 case "/tpa":
@@ -206,14 +221,14 @@ namespace RockUtils.Commands
 
                     Players.TryGetPlayer(currentTeleport.requester, out subject);
                     Chat.Send(player, $"You have accepted a teleport request from <color=cyan>{subject.Name}</color>");
-                    Chat.Send(subject, $"<color=cyan>{subject.Name}</color> accepted the teleport request");
+                    Chat.Send(subject, $"<color=cyan>{player.Name}</color> accepted the teleport request");
                     if (currentTeleport.ishere)
                     {
-                        Chatting.Commands.Teleport.TeleportTo(Player, subject.Position);
+                        Chatting.Commands.Teleport.TWeleportTo(player, subject.Position);
                     }
                     else
                     {
-                        Chatting.Commands.Teleport.TeleportTo(subject, Player.Position);
+                        Chatting.Commands.Teleport.TeleportTo(subject, player.Position);
                     }
 
                     return true;

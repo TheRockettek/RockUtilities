@@ -13,7 +13,7 @@ namespace RockUtils.Commands
         public static Dictionary<NetworkID, Dictionary<string, UnityEngine.Vector3Int>> homes = new Dictionary<NetworkID, Dictionary<string, UnityEngine.Vector3Int>>();
 
         // Load Homes when server starts
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterWorldLoad, "RockUtils.RockUtils.AfterWorldLoad")]
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.AfterWorldLoad, "RockUtils.RockUtils.LoadHomes")]
         [ModLoader.ModDocumentation("Loads users homes that are set")]
         private static void LoadHomes()
         {
@@ -48,8 +48,8 @@ namespace RockUtils.Commands
         }
 
         // Save Homes
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnAutoSaveWorld, "RockUtils.RockUtils.SaveOnAutoSave")]
-        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnQuit, "RockUtils.RockUtils.SaveOnQuit")]
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnAutoSaveWorld, "RockUtils.RockUtils.SaveHomes")]
+        [ModLoader.ModCallback(ModLoader.EModCallbackType.OnQuit, "RockUtils.RockUtils.SaveHomes")]
         [ModLoader.ModDocumentation("Saves stored user homes set")]
         private static void SaveHomes()
         {
@@ -137,8 +137,8 @@ namespace RockUtils.Commands
                     }
                 case "/homes":
                     playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
-
                     Chat.Send(player, $"Homes ({playerHomes.Keys.Count}): {string.Join(", ", playerHomes.Keys)}");
+
                     return true;
                 case "/sethome":
                 case "/addhome":
