@@ -121,6 +121,50 @@ namespace RockUtils.Shapes
 
             return affected;
         }
+        public static List<Vector3Int> MakeOutline(WorldEdit.AreaSelection area, int border = 1)
+        {
+            List<Vector3Int> affected = new List<Vector3Int>();
+
+            /*int minY = area.cornerA.y;
+            int maxY = area.cornerB.y;
+            int minX = area.cornerA.x;
+            int maxX = area.cornerB.x;
+            int minZ = area.cornerA.z;
+            int maxZ = area.cornerB.z;*/
+
+            int minX = Math.Min(area.posA.x, area.posB.x);
+            int maxX = Math.Max(area.posA.x, area.posB.x);
+            int minY = Math.Min(area.posA.y, area.posB.y);
+            int maxY = Math.Max(area.posA.y, area.posB.y);
+            int minZ = Math.Min(area.posA.z, area.posB.z);
+            int maxZ = Math.Max(area.posA.z, area.posB.z);
+
+            Vector3Int relative;
+            List<bool> truth;
+
+            for (int x = area.cornerB.x; x >= area.cornerA.x; x--)
+                for (int y = area.cornerB.y; y >= area.cornerA.y; y--)
+                    for (int z = area.cornerB.z; z >= area.cornerA.z; z--)
+                    {
+                        relative = new Vector3Int(x, y, z);
+                        {
+                            truth = new List<bool>
+                            {
+                                relative.y >= (maxY - border),
+                                relative.y <= (minY + border),
+                                relative.x >= (maxX - border),
+                                relative.x <= (minX + border),
+                                relative.z >= (maxZ - border),
+                                relative.z <= (minZ + border)
+                            };
+                            Log.Write($"{truth.FindAll(i => i == true).ToList().Count}");
+                            if (truth.Where(i => i == true).ToList().Count >= 2)
+                                affected.Add(relative);
+                        }
+                    }
+
+            return affected;
+        }
         public static List<Vector3Int> MakeWalls(WorldEdit.AreaSelection area, int border = 1)
         {
             List<Vector3Int> affected = new List<Vector3Int>();
