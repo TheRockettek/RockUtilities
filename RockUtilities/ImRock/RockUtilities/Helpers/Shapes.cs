@@ -121,7 +121,7 @@ namespace RockUtils.Shapes
 
             return affected;
         }
-        public static List<Vector3Int> MakeOutline(WorldEdit.AreaSelection area, int border = 1)
+        public static List<Vector3Int> MakeOutline(WorldEdit.AreaSelection area, int border = 0)
         {
             List<Vector3Int> affected = new List<Vector3Int>();
 
