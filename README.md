@@ -27,6 +27,8 @@ command name   |description
 /tpaccept      |Accepts a teleport request
 /tpdeny        |Denies a teleport request
 
+## WorldEdit
+
 commmand                                                     |description
 -------------------------------------------------------------|-----------
 /toggleeditwand | Toggles if your edit wand should work//pos1|Sets position 1 to your location
