@@ -69,7 +69,9 @@ It is possible to specify multiple block types when <blocks> is used. It will tr
 - [x] Global warp functionality
 - [ ] Display a list of colonies
 - [ ] Display more colony stats for owners
-- [ ] WorldEdit
+- [x] WorldEdit
+- [ ] WorldGuard-esque functionality
+- [ ] GriefLogger (Something similar to CoreProtect)
 
 ## Found a bug or want to suggest more features?
 
