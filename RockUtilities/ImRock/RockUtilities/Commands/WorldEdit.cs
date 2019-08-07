@@ -181,7 +181,6 @@ namespace RockUtils.WorldEdit
         public override ushort Apply(Vector3Int position)
         {
             System.Random rng = new System.Random(Guid.NewGuid().GetHashCode());
-            // System.Random rng = new System.Random(Pipliz.Time.MillisecondsSinceStart);
             return patternBlocks[rng.Next(patternBlocks.Count)];
         }
     }

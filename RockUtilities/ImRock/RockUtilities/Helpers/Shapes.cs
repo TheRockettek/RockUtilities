@@ -86,13 +86,6 @@ namespace RockUtils.Shapes
         {
             List<Vector3Int> affected = new List<Vector3Int>();
 
-            /*int minY = area.cornerA.y;
-            int maxY = area.cornerB.y;
-            int minX = area.cornerA.x;
-            int maxX = area.cornerB.x;
-            int minZ = area.cornerA.z;
-            int maxZ = area.cornerB.z;*/
-
             int minX = Math.Min(area.posA.x, area.posB.x);
             int maxX = Math.Max(area.posA.x, area.posB.x);
             int minY = Math.Min(area.posA.y, area.posB.y);
@@ -124,13 +117,6 @@ namespace RockUtils.Shapes
         public static List<Vector3Int> MakeOutline(WorldEdit.AreaSelection area, int border = 1)
         {
             List<Vector3Int> affected = new List<Vector3Int>();
-
-            /*int minY = area.cornerA.y;
-            int maxY = area.cornerB.y;
-            int minX = area.cornerA.x;
-            int maxX = area.cornerB.x;
-            int minZ = area.cornerA.z;
-            int maxZ = area.cornerB.z;*/
 
             int minX = Math.Min(area.posA.x, area.posB.x);
             int maxX = Math.Max(area.posA.x, area.posB.x);
@@ -312,8 +298,6 @@ namespace RockUtils.Shapes
                 height = -height;
                 pos = pos - new Vector3Int(0, height, 0);
             }
-
-            // Add check for top of map
 
             double invRadiusX = 1 / radiusX;
             double invRadiusZ = 1 / radiusZ;
