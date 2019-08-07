@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\WarpCommands.cs" />
-    <Compile Include="handler.cs" />
     <Compile Include="Commands\UtilityCommands.cs" />
     <Compile Include="Commands\HomeCommands.cs" />
     <Compile Include="Helpers\Shapes.cs" />
