@@ -15,6 +15,7 @@ command name   |description
 command name   |description
 ---------------|-----------
 /spawn         |Teleports you to spawn
+/colonyspawn   |Teleports you to nearest active colony banner
 /nearcolony    |Displays colonies that are nearby
 /players       |Lists players on the server
 /near          |Displays players that are neaeby
