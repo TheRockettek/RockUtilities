@@ -18,7 +18,7 @@ command name   |description
 /colonyspawn   |Teleports you to nearest active colony banner
 /nearcolony    |Displays colonies that are nearby
 /players       |Lists players on the server
-/near          |Displays players that are neaeby
+/near          |Displays players that are nearby
 /warps         |Lists all warps on a server
 /warp [name]   |Teleports to a warp
 /addwarp [name]|Adds a warp (requires warp.add permission)
