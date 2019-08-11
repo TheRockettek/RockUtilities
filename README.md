@@ -55,10 +55,10 @@ commmand                                                     |description
 //faces <blocks>                                             |Creates walls, ceiling and floor for a selection
 //outline <blocks>                                           |Creates an outline for a selection
 //hollow <length>                                            |Hollows the inside of a selection
-//cyl <blocks> <radius|x,z> [height]                         |Creates a filled cylinder with either a radius or specified width, depth and optionally a height
-//hcyl <blocks> <radius|x,z> [height]                        |Creates a hollow cylinder with either a radius or specified width, depth and optionally a height
-//sphere <blocks> <radius|x,y,z>                             |Creates a filled sphere with either a radius or specified width, depth and height
-//hsphere <blocks> <radius|x,y,z>                            |Creates a hollow sphere with either a radius or specified width, depth and height
+//cyl <blocks> <radius\|x,z> [height]                         |Creates a filled cylinder with either a radius or specified width, depth and optionally a height
+//hcyl <blocks> <radius\|x,z> [height]                        |Creates a hollow cylinder with either a radius or specified width, depth and optionally a height
+//sphere <blocks> <radius\|x,y,z>                             |Creates a filled sphere with either a radius or specified width, depth and height
+//hsphere <blocks> <radius\|x,y,z>                            |Creates a hollow sphere with either a radius or specified width, depth and height
 
 ### Using RandomBlocks
 It is possible to specify multiple block types when <blocks> is used. It will treat the occurance of a specific block as multiple which means that specifying multiple instances of the same block will make it occur more. To be able to specify multiple blocks, they must be spaced with a comma. An example of this distribution is with `stonebricks,stonebricks,stonebricks,stonebrickswhite` which has 3 occurances of stonebricks and one occurance of stonebrickswhite which means that ~75% of blocks placed will be stonebricks and 25% being stonebrickswhite.
