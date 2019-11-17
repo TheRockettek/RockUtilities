@@ -68,9 +68,9 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cp "$(TargetDir)$(TargetName).dll" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\RockUtilities\RockUtilities\$(TargetName).dll"
-cp "$(TargetDir)$(TargetName).pdb" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\RockUtilities\RockUtilities\$(TargetName).pdb"
+    <PostBuildEvent>cp "$(TargetDir)$(TargetName).dll" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\RockUtilities\$(TargetName).dll"
+cp "$(TargetDir)$(TargetName).pdb" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\RockUtilities\$(TargetName).pdb"
 cp "$(ProjectDir)modInfo.json" "$(TargetDir)modInfo.json"
-cp "$(ProjectDir)modInfo.json" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\RockUtilities\RockUtilities\modInfo.json"</PostBuildEvent>
+cp "$(ProjectDir)modInfo.json" "D:\SteamLibrary\steamapps\common\Colony Survival\gamedata\mods\RockUtilities\modInfo.json"</PostBuildEvent>
   </PropertyGroup>
 </Project>

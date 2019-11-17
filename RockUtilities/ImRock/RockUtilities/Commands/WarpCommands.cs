@@ -73,9 +73,15 @@ namespace RockUtils.Commands
 
             string warpName;
 
-            switch (args[0].ToLower())
+            string command = args[0].ToLower().Remove(0, 1);
+            if (command.StartsWith("rockutils:"))
             {
-                case "/warp":
+                command = command.Remove(0, 10);
+            }
+            switch (command)
+            {
+                case "warp":
+                case "warpto":
                     if (args.Count > 1)
                     {
                         warpName = string.Join(" ", args.Skip(1));
@@ -104,11 +110,14 @@ namespace RockUtils.Commands
                     Chatting.Commands.Teleport.TeleportTo(player, warp);
 
                     return true;
-                case "/warps":
+                case "warps":
+                case "warplist":
+                case "warpslist":
+                case "listwarps":
                     Chat.Send(player, $"Warps ({WarpManager.warps.Keys.Count}): {string.Join(", ", WarpManager.warps.Keys)}");
 
                     return true;
-                case "/addwarp":
+                case "addwarp":
                     if (PermissionsManager.CheckAndWarnPermission(player, "warp.add"))
                     {
                         if (!(args.Count > 1))
@@ -131,7 +140,7 @@ namespace RockUtils.Commands
                     }
 
                     return true;
-                case "/delwarp":
+                case "delwarp":
                     if (PermissionsManager.CheckAndWarnPermission(player, "warp.remove"))
                     {
                         if (!(args.Count > 1))

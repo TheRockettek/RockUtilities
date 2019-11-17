@@ -97,9 +97,14 @@ namespace RockUtils.Commands
             Dictionary<string, UnityEngine.Vector3Int> playerHomes;
             string homeName;
 
-            switch (args[0].ToLower())
+            string command = args[0].ToLower().Remove(0, 1);
+            if (command.StartsWith("rockutils:"))
             {
-                case "/home":
+                command = command.Remove(0, 10);
+            }
+            switch (command)
+            {
+                case "home":
                     {
                         playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
 
@@ -135,13 +140,13 @@ namespace RockUtils.Commands
 
                         return true;
                     }
-                case "/homes":
+                case "homes":
                     playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
                     Chat.Send(player, $"Homes ({playerHomes.Keys.Count}): {string.Join(", ", playerHomes.Keys)}");
 
                     return true;
-                case "/sethome":
-                case "/addhome":
+                case "sethome":
+                case "addhome":
                     playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
                     homeName = "home";
 
@@ -172,7 +177,7 @@ namespace RockUtils.Commands
                     Chat.Send(player, $"Added home <color=cyan>{homeName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
 
                     return true;
-                case "/delhome":
+                case "delhome":
                     playerHomes = HomeManager.homes.GetValueOrDefault(key: player.ID, new Dictionary<string, UnityEngine.Vector3Int>());
 
                     if (args.Count > 1)

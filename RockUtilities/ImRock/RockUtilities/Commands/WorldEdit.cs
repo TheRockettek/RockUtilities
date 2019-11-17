@@ -760,6 +760,8 @@ namespace RockUtils.WorldEdit
 
             switch (args[0])
             {
+                case "//":
+                case "//help":
                 case "/toggleeditwand":
                 case "//version":
                 case "//pos1":
@@ -846,8 +848,11 @@ namespace RockUtils.WorldEdit
 
             switch (args[0].ToLower())
             {
+                case "//":
                 case "//version":
+                case "//help":
                     Chat.Send(player, "<color=#3490fa>You are using RockUtilities Worldedit v0.4</color>");
+                    Chat.Send(player, "<color=#3490fa>Commands: //, //help, /toggleeditwand, //version, //stack, //undo, //clearclipboard, //clearhistory, //fast, //limit, //wand, //desel, //chunk, //expand, //outset, //contract, //count, //distr, //set, //replace, //replacenear, //walls, //faces, //outline, //hollow, //cut, //cyl, //hcyl, //sphere, //hsphere</color>");
 
                     return true;
                 case "//copy":

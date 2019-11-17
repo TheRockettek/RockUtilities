@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 
 namespace RockUtils.Commands
@@ -49,9 +50,13 @@ namespace RockUtils.Commands
             ActiveTeleport currentTeleport;
             Players.Player subject;
 
-            switch (args[0].ToLower())
+            string command = args[0].ToLower().Remove(0, 1);
+            if (command.StartsWith("rockutils:")) {
+                command = command.Remove(0, 10);
+            }
+            switch (command)
             {
-                case "/spawn":
+                case "spawn":
                     {
                         UnityEngine.Vector3Int spawn = ServerManager.TerrainGenerator.GetDefaultSpawnLocation();
                         Chatting.Commands.Teleport.TeleportTo(player, spawn);
@@ -59,7 +64,7 @@ namespace RockUtils.Commands
 
                         return true;
                     }
-                case "/colonyspawn":
+                case "colonyspawn":
                     {
                         if (player.ActiveColony == null)
                         {
@@ -72,17 +77,18 @@ namespace RockUtils.Commands
 
                         return true;
                     }
-                case "/players":
+                case "players":
+                case "online":
                     {
                         List<string> playerNames = Players.PlayerDatabase.Where(i => i.Value.ConnectionState == Players.EConnectionState.Connected).Select(i => i.Value.Name).ToList();
                         Chat.Send(player, $"Players ({playerNames.Count}): {string.Join(", ", playerNames)}");
 
                         return true;
                     }
-                case "/nearcolonies":
-                case "/nearcolony":
-                case "/nearbycolonies":
-                case "/nearbycolony":
+                case "nearcolonies":
+                case "nearcolony":
+                case "nearbycolonies":
+                case "nearbycolony":
                     {
                         float maxDistance = 250;
                         Vector3 playerPosition = player.Position;
@@ -99,8 +105,8 @@ namespace RockUtils.Commands
 
                         return true;
                     }
-                case "/near":
-                case "/nearby":
+                case "near":
+                case "nearby":
                     {
                         int maxDistance = 250;
                         Vector3 playerPosition = player.Position;
@@ -117,7 +123,7 @@ namespace RockUtils.Commands
 
                         return true;
                     }
-                case "/tpa":
+                case "tpa":
                     if (args.Count < 2)
                     {
                         Chat.Send(player, "Usage: /tpa {player}");
@@ -161,7 +167,7 @@ namespace RockUtils.Commands
                     });
 
                     return true;
-                case "/tpahere":
+                case "tpahere":
                     if (args.Count < 2)
                     {
                         Chat.Send(player, "Usage: /tpahere {player}");
@@ -202,7 +208,7 @@ namespace RockUtils.Commands
                     });
 
                     return true;
-                case "/tpaccept":
+                case "tpaccept":
                     if (!MiscManager.activeteleports.ContainsKey(player.ID))
                     {
                         Chat.Send(player, "You do not have any active teleport requests");
@@ -232,7 +238,7 @@ namespace RockUtils.Commands
                     }
 
                     return true;
-                case "/tpdeny":
+                case "tpdeny":
                     if (!MiscManager.activeteleports.ContainsKey(player.ID))
                     {
                         Chat.Send(player, "You do not have any active teleport requests");
