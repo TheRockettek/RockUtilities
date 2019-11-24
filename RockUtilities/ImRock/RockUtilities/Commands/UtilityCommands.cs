@@ -49,6 +49,7 @@ namespace RockUtils.Commands
 
             ActiveTeleport currentTeleport;
             Players.Player subject;
+            NetworkID key;
 
             string command = args[0].ToLower().Remove(0, 1);
             if (command.StartsWith("rockutils:")) {
@@ -142,16 +143,18 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID && !MiscManager.activeteleports[subject.ID].completed)
+                    key = subject.ID;
+
+                    if (MiscManager.activeteleports.ContainsKey(key) && !MiscManager.activeteleports[key].completed)
                     {
-                        Chat.Send(player, "You already have a pending teleport to this person");
+                        Chat.Send(player, "There is already a pending teleport to this person");
                         return true;
                     }
 
                     Chat.Send(player, $"Sending a teleport request to <color=cyan>{subject.Name}</color>");
                     Chat.Send(subject, $"<color=cyan>{player.Name}</color> would like to teleport to you. Do <color=cyan>/tpaccept</color> to accept");
                     currentTeleport = new ActiveTeleport(player.ID, subject.ID, false);
-                    MiscManager.activeteleports[subject.ID] = currentTeleport;
+                    MiscManager.activeteleports[key] = currentTeleport;
 
                     Task.Run(async delegate
                     {
@@ -160,10 +163,7 @@ namespace RockUtils.Commands
                         {
                             Chat.Send(player, $"<color=#f5350f>Teleport request to <color=cyan>{subject.Name}</color> timed out</color>");
                         }
-                        if (MiscManager.activeteleports.ContainsKey(subject.ID))
-                        {
-                            MiscManager.activeteleports.Remove(subject.ID);
-                        }
+                        MiscManager.activeteleports.Remove(key);
                     });
 
                     return true;
@@ -186,16 +186,18 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    if (MiscManager.activeteleports.ContainsKey(subject.ID) && MiscManager.activeteleports[subject.ID].requester == player.ID && !MiscManager.activeteleports[subject.ID].completed)
+                    key = subject.ID;
+
+                    if (MiscManager.activeteleports.ContainsKey(key) && !MiscManager.activeteleports[key].completed)
                     {
-                        Chat.Send(player, "You already have a pending teleport to this person");
+                        Chat.Send(player, "There is already a pending teleport to this person");
                         return true;
                     }
 
                     Chat.Send(player, $"Sending a teleport request to <color=cyan>{subject.Name}</color>");
                     Chat.Send(subject, $"<color=cyan>{player.Name}</color> would you to teleport to them. Do <color=cyan>/tpaccept</color> to accept");
                     currentTeleport = new ActiveTeleport(player.ID, subject.ID, true);
-                    MiscManager.activeteleports[subject.ID] = currentTeleport;
+                    MiscManager.activeteleports[key] = currentTeleport;
 
                     Task.Run(async delegate
                     {
@@ -204,18 +206,20 @@ namespace RockUtils.Commands
                         {
                             Chat.Send(player, $"<color=#f5350f>Teleport request for <color=cyan>{subject.Name}</color> timed out</color>");
                         }
-                        MiscManager.activeteleports.Remove(subject.ID);
+                        MiscManager.activeteleports.Remove(key);
                     });
 
                     return true;
                 case "tpaccept":
-                    if (!MiscManager.activeteleports.ContainsKey(player.ID))
+                    key = player.ID;
+
+                    if (!MiscManager.activeteleports.ContainsKey(key))
                     {
                         Chat.Send(player, "You do not have any active teleport requests");
                         return true;
                     }
 
-                    currentTeleport = MiscManager.activeteleports[player.ID];
+                    currentTeleport = MiscManager.activeteleports[key];
                     if (currentTeleport.expired || currentTeleport.completed)
                     {
                         Chat.Send(player, "You do not have any active teleport requests");
@@ -223,7 +227,7 @@ namespace RockUtils.Commands
                     }
 
                     currentTeleport.completed = true;
-                    MiscManager.activeteleports[player.ID] = currentTeleport;
+                    MiscManager.activeteleports[key] = currentTeleport;
 
                     Players.TryGetPlayer(currentTeleport.requester, out subject);
                     Chat.Send(player, $"You have accepted a teleport request from <color=cyan>{subject.Name}</color>");
@@ -239,13 +243,15 @@ namespace RockUtils.Commands
 
                     return true;
                 case "tpdeny":
-                    if (!MiscManager.activeteleports.ContainsKey(player.ID))
+                    key = player.ID;
+
+                    if (!MiscManager.activeteleports.ContainsKey(key))
                     {
                         Chat.Send(player, "You do not have any active teleport requests");
                         return true;
                     }
 
-                    currentTeleport = MiscManager.activeteleports[player.ID];
+                    currentTeleport = MiscManager.activeteleports[key];
                     if (currentTeleport.expired || currentTeleport.completed)
                     {
                         Chat.Send(player, "You do not have any active teleport requests");
@@ -253,7 +259,7 @@ namespace RockUtils.Commands
                     }
 
                     currentTeleport.completed = true;
-                    MiscManager.activeteleports[player.ID] = currentTeleport;
+                    MiscManager.activeteleports[key] = currentTeleport;
 
                     Players.TryGetPlayer(currentTeleport.requester, out subject);
                     Chat.Send(player, $"You have denied a teleport request from <color=cyan>{subject.Name}</color>");
