@@ -339,5 +339,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-RockUtilities/ImRock/RockUtilities/obj
-RockUtilities/ImRock/RockUtilities/bin
+/RockUtilities/ImRock/RockUtilities/obj/
+/RockUtilities/ImRock/RockUtilities/bin/
