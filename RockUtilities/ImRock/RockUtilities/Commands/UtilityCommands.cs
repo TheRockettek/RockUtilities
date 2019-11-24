@@ -159,7 +159,7 @@ namespace RockUtils.Commands
                     Task.Run(async delegate
                     {
                         await Task.Delay(currentTeleport.expirationInSeconds * 1000);
-                        if (currentTeleport.ChangeType<bool>() && !currentTeleport.completed)
+                        if (!currentTeleport.completed)
                         {
                             Chat.Send(player, $"<color=#f5350f>Teleport request to <color=cyan>{subject.Name}</color> timed out</color>");
                         }
