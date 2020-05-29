@@ -130,12 +130,12 @@ namespace RockUtils.Commands
 
                         if (!playerHomes.ContainsKey(homeName))
                         {
-                            Chat.Send(player, $"No such home with the name: <color=cyan>{homeName}</color>");
+                            Chat.Send(player, $"No such home with the name: <color=#5ad5fa>{homeName}</color>");
                             return true;
                         }
 
                         UnityEngine.Vector3Int home = playerHomes[homeName];
-                        Chat.Send(player, $"Sending you to <color=cyan>{homeName}</color>...");
+                        Chat.Send(player, $"Sending you to <color=#5ad5fa>{homeName}</color>...");
                         Chatting.Commands.Teleport.TeleportTo(player, home);
 
                         return true;
@@ -174,7 +174,7 @@ namespace RockUtils.Commands
                     playerHomes.Add(homeName, intplayerPosition);
                     HomeManager.homes[player.ID] = playerHomes;
 
-                    Chat.Send(player, $"Added home <color=cyan>{homeName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
+                    Chat.Send(player, $"Added home <color=#5ad5fa>{homeName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
 
                     return true;
                 case "delhome":
@@ -202,14 +202,14 @@ namespace RockUtils.Commands
 
                     if (!playerHomes.ContainsKey(homeName))
                     {
-                        Chat.Send(player, $"No such home with the name: <color=cyan>{homeName}</color>");
+                        Chat.Send(player, $"No such home with the name: <color=#5ad5fa>{homeName}</color>");
                         return true;
                     }
 
                     playerHomes.Remove(homeName);
                     HomeManager.homes[player.ID] = playerHomes;
 
-                    Chat.Send(player, $"Removed home <color=cyan>{homeName}</color>");
+                    Chat.Send(player, $"Removed home <color=#5ad5fa>{homeName}</color>");
 
                     return true;
             }

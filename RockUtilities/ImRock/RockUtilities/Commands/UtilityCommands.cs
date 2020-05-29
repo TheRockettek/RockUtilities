@@ -151,8 +151,8 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    Chat.Send(player, $"Sending a teleport request to <color=cyan>{subject.Name}</color>");
-                    Chat.Send(subject, $"<color=cyan>{player.Name}</color> would like to teleport to you. Do <color=cyan>/tpaccept</color> to accept");
+                    Chat.Send(player, $"Sending a teleport request to <color=#5ad5fa>{subject.Name}</color>");
+                    Chat.Send(subject, $"<color=#5ad5fa>{player.Name}</color> would like to teleport to you. Do <color=#5ad5fa>/tpaccept</color> to accept");
                     currentTeleport = new ActiveTeleport(player.ID, subject.ID, false);
                     MiscManager.activeteleports[key] = currentTeleport;
 
@@ -161,7 +161,7 @@ namespace RockUtils.Commands
                         await Task.Delay(currentTeleport.expirationInSeconds * 1000);
                         if (!currentTeleport.completed)
                         {
-                            Chat.Send(player, $"<color=#f5350f>Teleport request to <color=cyan>{subject.Name}</color> timed out</color>");
+                            Chat.Send(player, $"<color=#f5350f>Teleport request to <color=#5ad5fa>{subject.Name}</color> timed out</color>");
                         }
                         MiscManager.activeteleports.Remove(key);
                     });
@@ -194,8 +194,8 @@ namespace RockUtils.Commands
                         return true;
                     }
 
-                    Chat.Send(player, $"Sending a teleport request to <color=cyan>{subject.Name}</color>");
-                    Chat.Send(subject, $"<color=cyan>{player.Name}</color> would you to teleport to them. Do <color=cyan>/tpaccept</color> to accept");
+                    Chat.Send(player, $"Sending a teleport request to <color=#5ad5fa>{subject.Name}</color>");
+                    Chat.Send(subject, $"<color=#5ad5fa>{player.Name}</color> would you to teleport to them. Do <color=#5ad5fa>/tpaccept</color> to accept");
                     currentTeleport = new ActiveTeleport(player.ID, subject.ID, true);
                     MiscManager.activeteleports[key] = currentTeleport;
 
@@ -204,7 +204,7 @@ namespace RockUtils.Commands
                         await Task.Delay(currentTeleport.expirationInSeconds * 1000);
                         if (!currentTeleport.completed)
                         {
-                            Chat.Send(player, $"<color=#f5350f>Teleport request for <color=cyan>{subject.Name}</color> timed out</color>");
+                            Chat.Send(player, $"<color=#f5350f>Teleport request for <color=#5ad5fa>{subject.Name}</color> timed out</color>");
                         }
                         MiscManager.activeteleports.Remove(key);
                     });
@@ -230,8 +230,8 @@ namespace RockUtils.Commands
                     MiscManager.activeteleports[key] = currentTeleport;
 
                     Players.TryGetPlayer(currentTeleport.requester, out subject);
-                    Chat.Send(player, $"You have accepted a teleport request from <color=cyan>{subject.Name}</color>");
-                    Chat.Send(subject, $"<color=cyan>{player.Name}</color> accepted the teleport request");
+                    Chat.Send(player, $"You have accepted a teleport request from <color=#5ad5fa>{subject.Name}</color>");
+                    Chat.Send(subject, $"<color=#5ad5fa>{player.Name}</color> accepted the teleport request");
                     if (currentTeleport.ishere)
                     {
                         Chatting.Commands.Teleport.TeleportTo(player, subject.Position);
@@ -262,8 +262,8 @@ namespace RockUtils.Commands
                     MiscManager.activeteleports[key] = currentTeleport;
 
                     Players.TryGetPlayer(currentTeleport.requester, out subject);
-                    Chat.Send(player, $"You have denied a teleport request from <color=cyan>{subject.Name}</color>");
-                    Chat.Send(subject, $"<color=cyan>{player.Name}</color> denied the teleport request");
+                    Chat.Send(player, $"You have denied a teleport request from <color=#5ad5fa>{subject.Name}</color>");
+                    Chat.Send(subject, $"<color=#5ad5fa>{player.Name}</color> denied the teleport request");
 
                     return true;
             }

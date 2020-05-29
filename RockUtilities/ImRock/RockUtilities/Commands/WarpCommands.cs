@@ -101,12 +101,12 @@ namespace RockUtils.Commands
 
                     if (!WarpManager.warps.ContainsKey(warpName))
                     {
-                        Chat.Send(player, $"No such warp with the name: <color=cyan>{warpName}</color>");
+                        Chat.Send(player, $"No such warp with the name: <color=#5ad5fa>{warpName}</color>");
                         return true;
                     }
 
                     UnityEngine.Vector3Int warp = WarpManager.warps[warpName];
-                    Chat.Send(player, $"Sending you to <color=cyan>{warpName}</color>...");
+                    Chat.Send(player, $"Sending you to <color=#5ad5fa>{warpName}</color>...");
                     Chatting.Commands.Teleport.TeleportTo(player, warp);
 
                     return true;
@@ -136,7 +136,7 @@ namespace RockUtils.Commands
                         UnityEngine.Vector3Int intplayerPosition = new UnityEngine.Vector3Int(player.Position.x.ChangeType<int>(), player.Position.y.ChangeType<int>(), player.Position.z.ChangeType<int>());
                         WarpManager.warps.Add(warpName, intplayerPosition);
 
-                        Chat.Send(player, $"Added warp <color=cyan>{warpName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
+                        Chat.Send(player, $"Added warp <color=#5ad5fa>{warpName}</color> at position [{intplayerPosition.x}, {intplayerPosition.y}, {intplayerPosition.z}]");
                     }
 
                     return true;
@@ -158,7 +158,7 @@ namespace RockUtils.Commands
 
                         WarpManager.warps.Remove(warpName);
 
-                        Chat.Send(player, $"Removed warp <color=cyan>{warpName}</color>");
+                        Chat.Send(player, $"Removed warp <color=#5ad5fa>{warpName}</color>");
                     }
 
                     return true;

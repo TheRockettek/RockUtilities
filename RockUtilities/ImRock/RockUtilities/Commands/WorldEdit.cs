@@ -293,7 +293,7 @@ namespace RockUtils.WorldEdit
                 }
                 catch (Exception e)
                 {
-                    Chat.Send(player, $"<color=red>Encountered exception whilst retrieving voxel: {e}</color>");
+                    Chat.Send(player, $"<color=#ff0000>Encountered exception whilst retrieving voxel: {e}</color>");
                     throw;
                 }
 
@@ -1108,7 +1108,7 @@ namespace RockUtils.WorldEdit
 
                     if (toggled)
                     {
-                        Chat.Send(player, $"<color=red>Fastmode has been enabled, this may cause instability</color>");
+                        Chat.Send(player, $"<color=#ff0000>Fastmode has been enabled, this may cause instability</color>");
                     }
                     else
                     {
