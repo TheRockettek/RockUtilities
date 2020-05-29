@@ -7,7 +7,7 @@
     "enabled": true,
     "marksgamemodded": true,
     "compatibleversions": [
-      "0.7.0"
+      "0.7.3"
     ],
     "about": "Utilities mod for handling your server"
   }
